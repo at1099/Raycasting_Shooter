@@ -20,4 +20,12 @@ public class RayHit {
     public boolean isVerticalSide() {
         return isVerticalSide;
     }
+
+    public int getWallType() {
+        return wallType;
+    }
+
+    public double getWallX() {
+        return wallX;
+    }
 }
