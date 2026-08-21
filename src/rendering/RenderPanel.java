@@ -2,11 +2,13 @@ package rendering;
 
 import world.Map;
 import world.Player;
+import world.Sprite;
 
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.List;
 
 public class RenderPanel extends JPanel {
 
@@ -27,14 +29,17 @@ public class RenderPanel extends JPanel {
 
     // Called once per frame, before repaint(), to fill the buffer with the new frame's contents
     public void renderFrame(Raycaster raycaster, WallRenderer wallRenderer,
-                            FloorCeilingRenderer floorCeilingRenderer, Player player, Map map /*, sprites later */) {
+                            FloorCeilingRenderer floorCeilingRenderer, SpriteRenderer spriteRenderer, Player player, Map map) {
 
         RayHit[] hits = raycaster.castAllRays(player, map);
 
         floorCeilingRenderer.draw(hits, pixels, width, height);
         wallRenderer.draw(hits, pixels, width, height);
 
-        // spriteRenderer.draw(...) goes here later, once you have sprites + depth buffer
+        for (int i = 0; i < map.getSpriteList().size(); i++){
+            Sprite sprite = map.getSpriteList().get(i);
+            spriteRenderer.draw(hits, pixels, width, height, player, sprite);
+        }
     }
 
     // Swing calls this automatically whenever repaint() is triggered

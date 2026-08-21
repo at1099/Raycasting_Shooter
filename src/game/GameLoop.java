@@ -3,6 +3,9 @@ package game;
 import rendering.*;
 import world.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameLoop {
     private RenderPanel panel;
     private Input input;
@@ -11,10 +14,11 @@ public class GameLoop {
     private Raycaster raycaster;
     private WallRenderer wallRenderer;
     private FloorCeilingRenderer floorCeilingRenderer;
+    private SpriteRenderer spriteRenderer;
     private boolean running = true;
 
     public GameLoop(RenderPanel panel, Input input, Player player, Map map,
-                    Raycaster raycaster, WallRenderer wallRenderer, FloorCeilingRenderer floorCeilingRenderer) {
+                    Raycaster raycaster, WallRenderer wallRenderer, FloorCeilingRenderer floorCeilingRenderer,  SpriteRenderer spriteRenderer) {
         this.panel = panel;
         this.input = input;
         this.player = player;
@@ -22,6 +26,7 @@ public class GameLoop {
         this.raycaster = raycaster;
         this.wallRenderer = wallRenderer;
         this.floorCeilingRenderer = floorCeilingRenderer;
+        this.spriteRenderer = spriteRenderer;
     }
 
     public void start() {
@@ -32,7 +37,7 @@ public class GameLoop {
             lastTime = now; //resets last time
 
             player.update(input, deltaTime, map);
-            panel.renderFrame(raycaster, wallRenderer, floorCeilingRenderer, player, map);
+            panel.renderFrame(raycaster, wallRenderer, floorCeilingRenderer, spriteRenderer, player, map);
             panel.repaint();
 
             try { Thread.sleep(16); } catch (InterruptedException e) {} // rough ~60fps cap

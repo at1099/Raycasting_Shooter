@@ -1,5 +1,8 @@
 package world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Map {
     // 0 = empty space, >0 = wall type
     private int[][] grid = {
@@ -25,6 +28,16 @@ public class Map {
             {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
             {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
+
+    private List<Sprite> spriteList = new ArrayList<>();
+    public Map() {
+        spriteList.add(new Sprite(5.5, 2.5));
+        spriteList.add(new Sprite(7.5, 3.5));
+    }
+
+    public List<Sprite> getSpriteList() {
+        return spriteList;
+    }
 
     public boolean isWall(double x, double y) {
         int gx = (int) x;

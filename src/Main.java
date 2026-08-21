@@ -23,7 +23,8 @@ public class Main {
         Raycaster raycaster = new Raycaster(Config.SCREEN_WIDTH);
         WallRenderer wallRenderer = new WallRenderer();
         FloorCeilingRenderer floorCeilingRenderer = new FloorCeilingRenderer();
+        SpriteRenderer spriteRenderer = new SpriteRenderer();
 
-        new GameLoop(panel, input, player, map, raycaster, wallRenderer, floorCeilingRenderer).start();
+        new GameLoop(panel, input, player, map, raycaster, wallRenderer, floorCeilingRenderer, spriteRenderer).start();
     }
 }
